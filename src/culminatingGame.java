@@ -38,7 +38,8 @@ public class culminatingGame extends javax.swing.JFrame {
 
     //initializing an arrayList for the highscores of the player
     ArrayList<Integer> scores = new ArrayList();
-
+    
+    int[] hs = new int[10];
     //declaring the variables that are used in both private and public blocks of code(global variables)
     int points = 0;
     int tries = 3;
@@ -46,6 +47,8 @@ public class culminatingGame extends javax.swing.JFrame {
     int currentS = 0;
     int remaining = 0;
     int buttonClicked;
+    
+    
 
     /**
      * Creates new form culminatingGame
@@ -63,9 +66,14 @@ public class culminatingGame extends javax.swing.JFrame {
         rulesButton.setVisible(false);
 
         //add 10 slots for the players top 10 high scores
-        Collections.addAll(scores, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0);
-        Collections.sort(scores);
+        int[] hs = {0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+        
+        Collections.addAll(scores, 0,0,0,0,0,0,0,0,0,0);
+        //Collections.sort(scores);
 
+        
+        
+        
     }
 
     /**
@@ -658,17 +666,36 @@ public class culminatingGame extends javax.swing.JFrame {
         /*add the players points to the scores arraylist and sort
         it in descending order and get rid of last element to only display top
         10 scores*/
+        
+        
         scores.add(points);
-        Collections.sort(scores);
-        Collections.reverse(scores);
-        scores.remove(scores.size() - 1);
+        //Collections.sort(scores);
+        //Collections.reverse(scores);
+        //scores.remove(scores.size() - 1);
         
         
         //iterate through the score size and display each score bin order from highest to lowest
-        for (int i = 0; i < scores.size(); i++) {
-           binTextField1.setText(binTextField1.getText() + "\n" + (i + 1) + ": " + scores.get(i));     
+        
+            
+            int [] test = {3,1,5,2};
+            
+            System.out.println(Arrays.toString(sorting(test)));
+            
+        for (int i = 0; i < hs.length; i++) {
+           Arrays.toString(sorting(hs));
+           
+           hs[i] = scores.get(i);
+           
+           System.out.println("Array1:\tArrayL1:\n"+hs[i] +"\t"+ scores.get(i));
+    
+            
+           System.out.println("Array2:\tArrayL:2\n"+hs[i] +"\t"+ scores.get(i)); 
+           
+           Arrays.toString(sorting(hs));
+           binTextField1.setText(binTextField1.getText() + "\n" + (i + 1) + ": " + hs[i]); 
+           
+       
         }
-      
     }//GEN-LAST:event_scoreButtonActionPerformed
 
     private void rulesButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_rulesButtonActionPerformed
@@ -809,6 +836,35 @@ public class culminatingGame extends javax.swing.JFrame {
         answerButton.setText("Answer");
 
     }
+    public static int[] sorting(int nums[]) {
+        
+        long startTime = System.nanoTime();
+        int min;
+        for (int i = 0; i < nums.length; i++) {
+            min = i;
+            for (int j = i + 1; j < nums.length; j++) {
+                if (nums[j] > nums[min]) {
+                    min = j;
+                }
+                //c = nums.length*(i+1);
+            }
+
+            if (min != i) {
+                int temp = nums[i];
+                nums[i] = nums[min];
+                nums[min] = temp;
+            }
+        }
+
+        return nums;
+    }
+    
+        public static void outputting(int[] nums) {
+        System.out.println(Arrays.toString(SortAlgorithm.sorting(nums)));
+        System.out.println(SortAlgorithm.Duration());
+        System.out.println(SortAlgorithm.comparisons() + " comparisons");
+    }
+
 
     /**
      * @param args the command line arguments
